@@ -7,6 +7,9 @@
     (service/add-transaction! transaction storage)
     transaction))
 
+(defn transactions [storage]
+  (service/transactions storage))
+
 (defn total-value-by-account-and-category [storage]
-  (let [ transactions (service/transactions storage)]
+  (let [transactions (service/transactions storage)]
     (logic/total-value-by-account-and-category transactions)))

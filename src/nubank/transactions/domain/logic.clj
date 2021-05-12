@@ -17,7 +17,7 @@
 
 (defn categories-by-account [[account-id transactions]]
   {:account-id    account-id
-   :categories  (->> (group-by :category transactions)
+   :total-value-by-category  (->> (group-by :category transactions)
                      (map total-value-by-category))})
 
 (defn total-value-by-account-and-category [transactions]
