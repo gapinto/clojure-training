@@ -22,7 +22,8 @@
   {:account-id              account-id
    :total-value-by-category (->> (group-by :category transactions)
                                  (map total-value-by-category)
-                                 (sort-by :total-value))})
+                                 (sort-by :total-value)
+                                 (reverse))})
 
 (defn total-value-by-account-and-category [transactions]
   (->> transactions
