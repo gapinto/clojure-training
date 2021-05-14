@@ -12,15 +12,17 @@
 
 (defn total-value-by-category [[category transactions]]
   {
-   category (->> transactions
-                 (map #(% :value))
-                 (reduce +))
+   :category    category
+   :total-value (->> transactions
+                     (map #(% :value))
+                     (reduce +))
    })
 
 (defn categories-by-account [[account-id transactions]]
-  {:account-id    account-id
-   :total-value-by-category  (->> (group-by :category transactions)
-                     (map total-value-by-category))})
+  {:account-id              account-id
+   :total-value-by-category (->> (group-by :category transactions)
+                                 (map total-value-by-category)
+                                 (sort-by :total-value))})
 
 (defn total-value-by-account-and-category [transactions]
   (->> transactions
