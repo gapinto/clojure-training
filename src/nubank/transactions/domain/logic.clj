@@ -12,7 +12,9 @@
 
 (defn total-value-by-category [[category transactions]]
   {
-   category (reduce + (map #(% :value) transactions))
+   category (->> transactions
+                 (map #(% :value))
+                 (reduce +))
    })
 
 (defn categories-by-account [[account-id transactions]]
