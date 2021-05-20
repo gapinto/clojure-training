@@ -1,15 +1,14 @@
 (ns nubank.transactions.application.controller
   (:require [nubank.transactions.domain.logic :as logic])
-  (:require [nubank.transactions.domain.transaction-service :as service]))
+  (:require [nubank.transactions.domain.ports.storage-client :as storage-client])
+  (:require [nubank.transactions.domain.use-cases.create-transaction :as create-transaction])
+  (:require [nubank.transactions.domain.use-cases.list-total-value-by-account-and-category :as total-value-by-account-and-category]))
 
 (defn create-transaction! [account-id value company category date storage]
-  (let [transaction (logic/new-transaction account-id value company category date)]
-    (service/add-transaction! transaction storage)
-    transaction))
+  (create-transaction/create! account-id value company category date storage))
 
 (defn transactions [storage]
-  (service/transactions storage))
+  (storage-client/transactions storage))
 
 (defn total-value-by-account-and-category [storage]
-  (let [transactions (service/transactions storage)]
-    (logic/total-value-by-account-and-category transactions)))
+  (total-value-by-account-and-category/list-transactions storage))

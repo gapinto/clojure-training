@@ -2,7 +2,7 @@
   (:import [java.util UUID]))
 
 (defn new-account [customer-id customer-name credit-limit]
-  {:id           (UUID/randomUUID)
-   :name         customer-name
-   :customer-id  customer-id
-   :credit-limit credit-limit})
+  {:account/id            (UUID/randomUUID)
+   :account/customer-name customer-name
+   :account/customer-id   customer-id
+   :account/credit-limit  credit-limit})

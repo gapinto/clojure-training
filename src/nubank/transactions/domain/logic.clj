@@ -3,30 +3,29 @@
 
 
 (defn new-transaction [account-id value company category date]
-  {:id         (UUID/randomUUID)
-   :account-id account-id
-   :value      value
-   :company    company
-   :category   category
-   :date       date})
+  {:transaction/id         (UUID/randomUUID)
+   :transaction/account-id account-id
+   :transaction/value      value
+   :transaction/company    company
+   :transaction/category   category
+   :transaction/date       date})
 
 (defn total-value-by-category [[category transactions]]
   {
-   :category    category
-   :total-value (->> transactions
-                     (map #(% :value))
+   :transaction/category    category
+   :transaction/total-value (->> transactions
+                     (map #(% :transaction/value))
                      (reduce +))
    })
 
 (defn categories-by-account [[account-id transactions]]
-  {:account-id              account-id
-   :total-value-by-category (->> (group-by :category transactions)
+  {:transaction/account-id              account-id
+   :transaction/total-value-by-category (->> (group-by :transaction/category transactions)
                                  (map total-value-by-category)
-                                 (sort-by :total-value)
+                                 (sort-by :transaction/total-value)
                                  (reverse))})
 
 (defn total-value-by-account-and-category [transactions]
   (->> transactions
-       (vals)
-       (group-by :account-id)
+       (group-by :transaction/account-id)
        (map categories-by-account)))

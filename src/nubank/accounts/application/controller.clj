@@ -1,12 +1,9 @@
 (ns nubank.accounts.application.controller
-  (:require [nubank.accounts.domain.logic :as logic])
-  (:require [nubank.accounts.domain.account-service :as service]))
+  (:require [nubank.accounts.domain.use-cases.create-account :as create-account])
+  (:require [nubank.accounts.domain.use-cases.list-accounts :as list-accounts]))
 
-(defn create-account! [customer-id customer-name credit-limit storage create-credit-cards]
-  (let [account (logic/new-account customer-id customer-name credit-limit)]
-    (service/add-account! account storage)
-    (create-credit-cards (:id account))
-    account))
+(defn create-account! [customer-id customer-name credit-limit storage create-credit-cards-fn]
+  (create-account/create! customer-id customer-name credit-limit storage create-credit-cards-fn))
 
 (defn accounts [storage]
-  (service/accounts storage))
+  (list-accounts/accounts storage))

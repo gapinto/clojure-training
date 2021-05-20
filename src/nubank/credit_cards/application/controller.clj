@@ -1,11 +1,9 @@
 (ns nubank.credit-cards.application.controller
-  (:require [nubank.credit-cards.domain.logic :as logic])
-  (:require [nubank.credit-cards.domain.credit-card-service :as service]))
+  (:require [nubank.credit-cards.domain.use-cases.create-credit-card :as create-card])
+  (:require [nubank.credit-cards.domain.use-cases.list-credit-card :as list-cards]))
 
 (defn create-credit-card! [account-id number ccv expiration storage]
-  (let [credit-card (logic/new-card account-id number ccv expiration)]
-    (service/add-credit-card! credit-card storage)
-    credit-card))
+  (create-card/create! account-id number ccv expiration storage))
 
 (defn credit-cards [storage]
-  (service/credit-cards storage))
+  (list-cards/cards storage))

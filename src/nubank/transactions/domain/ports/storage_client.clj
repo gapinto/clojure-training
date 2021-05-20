@@ -2,5 +2,5 @@
 
 (defprotocol StorageClient
   "Protocol for simple storage mechanism"
-  (read-all [storage] "Return the entire contents of storage")
-  (put! [storage update-fn] "Mutate the storage with the provided function"))
+  (transactions [storage] "Return the entire contents of storage")
+  (add-transaction! [storage transaction] "Mutate the storage with the provided function"))
