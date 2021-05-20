@@ -57,7 +57,7 @@
     (create-transactions account-1 "@Xiquetu" "Roupa" 200.0M)
     (create-transactions account-2 "@Xiquetu" "Roupa" 200.0M)
     (create-transactions account-2 "@Udemy" "Estudos" 100.0M)
-    (create-transactions account-2 "@Rei da coxinha" "Comida" 100)
+    (create-transactions account-2 "@Rei da coxinha" "Comida" 100.0M)
     (println "\n********* Transactions ************")
     (pprint (transaction-controller/transactions transaction-storage))))
 
