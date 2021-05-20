@@ -51,14 +51,13 @@
   (let [account-1 (:account/id (first (account-controller/accounts account-storage)))
         account-2 (:account/id (second (account-controller/accounts account-storage)))]
 
-    (println "\n********* Creating Transactions ************")
-
     (create-transactions account-1 "@Xiquetu" "Roupa" 100.0M)
     (create-transactions account-1 "@Xiquetu" "Roupa" 200.0M)
     (create-transactions account-2 "@Xiquetu" "Roupa" 200.0M)
     (create-transactions account-2 "@Udemy" "Estudos" 100.0M)
     (create-transactions account-2 "@Rei da coxinha" "Comida" 100.0M)
     (println "\n********* Transactions ************")
+
     (pprint (transaction-controller/transactions transaction-storage))))
 
 (defn start []

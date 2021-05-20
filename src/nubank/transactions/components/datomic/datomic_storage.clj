@@ -13,7 +13,7 @@
 (defrecord DatomicStorage [conn]
   storage-client/StorageClient
   (add-transaction! [_this credit-card]
-     (println (api/transact conn [credit-card])))
+     (api/transact conn [credit-card]))
   (transactions [_this]
     (let [transactions (list-transactions conn)]
       (map datomic->transaction-entity transactions))))

@@ -5,7 +5,8 @@
 (defrecord InMemoryStorage [storage]
   storage-client/StorageClient
   (add-account! [_this account] (swap! storage #(assoc % (:account/id account) account)))
-  (accounts [_this] @storage))
+  (accounts [_this]
+    (->> @storage (vals))))
 
 (defn new-in-memory []
   "Instantiate the protocol once with an empty object"

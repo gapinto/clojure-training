@@ -4,7 +4,7 @@
 ; Define a record that extends StorageClient protocol interface and implement its functions
 (defrecord InMemoryStorage [storage]
   storage-client/StorageClient
-  (credit-cards [_this] @storage)
+  (credit-cards [_this] (->> @storage (vals)))
   (add-credit-card! [_this credit-card]
     (swap! storage #(assoc % (:credit-card/id credit-card) credit-card))))
 
